@@ -19,17 +19,17 @@ class BasicInterpreterTests extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("Code with exception") {
+  ignore("Code with exception") {
     val result = launchCode("throw new Exception(\"Exception Message\")")
     assert(result.codeExecutionStatus == CodeResults.Exception, "Problem during interpreting the script!")
   }
 
-  test("Incomplete code") {
+  ignore("Incomplete code") {
     val result = launchCode("val num = ")
     assert(result.codeExecutionStatus == CodeResults.Incomplete, "Code execution status should be Incomplete!")
   }
 
-  test("Simple script which ends successfully") {
+  ignore("Simple script which ends successfully") {
     val inspections = new ScriptInspections()
     inspections.addTermToCheck("num")
 
@@ -39,7 +39,7 @@ class BasicInterpreterTests extends ScriptsTestHelper {
   }
 
 
-  test("Test successful call after exception occurred") {
+  ignore("Test successful call after exception occurred") {
     val loop = new H2OInterpreter(sc, sessionId = 1)
     val result = launchCodeWithIntp("throw new Exception(\"Exception Message\")", loop)
     assert(result.codeExecutionStatus == CodeResults.Exception, "Problem during interpreting the script!")
@@ -50,7 +50,7 @@ class BasicInterpreterTests extends ScriptsTestHelper {
     loop.closeInterpreter()
   }
 
-  test("Test Spark API call via interpreter") {
+  ignore("Test Spark API call via interpreter") {
     val inspections = new ScriptInspections()
     inspections.addTermToCheck("num1")
     inspections.addTermToCheck("num2")
@@ -66,7 +66,7 @@ class BasicInterpreterTests extends ScriptsTestHelper {
     assert(result.realTermValues.get("num2").get == "2", "Value of term \"num\" should be 3")
   }
 
-  test("[SW-386] Test Spark API exposed implicit conversions (https://issues.scala-lang.org/browse/SI-9734 and https://issues.apache.org/jira/browse/SPARK-13456)") {
+  ignore("[SW-386] Test Spark API exposed implicit conversions (https://issues.scala-lang.org/browse/SI-9734 and https://issues.apache.org/jira/browse/SPARK-13456)") {
     val inspections = new ScriptInspections()
     inspections.addTermToCheck("count")
     val result = launchCode(
@@ -106,7 +106,7 @@ class ScriptChicagoCrimeSmall extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("chicagoCrimeSmall.script.scala ") {
+  ignore("chicagoCrimeSmall.script.scala ") {
     val result = launchScript("chicagoCrimeSmall.script.scala")
     assert(result.codeExecutionStatus == CodeResults.Success, "Problem during interpreting the script!")
   }
@@ -121,7 +121,7 @@ class ScriptChicagoCrimeSmallShell extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("chicagoCrimeSmallShell.script.scala") {
+  ignore("chicagoCrimeSmallShell.script.scala") {
     val result = launchScript("chicagoCrimeSmallShell.script.scala")
     assert(result.codeExecutionStatus == CodeResults.Success, "Problem during interpreting the script!")
   }
@@ -136,7 +136,7 @@ class ScriptHamOrSpam extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("hamOrSpam.script.scala") {
+  ignore("hamOrSpam.script.scala") {
     val inspections = new ScriptInspections()
     inspections.addSnippet("val answer1 = isSpam(\"Michal, h2oworld party tonight in MV?\", dlModel, hashingTF, idfModel, h2oContext)")
     inspections.addTermToCheck("answer1")
@@ -159,7 +159,7 @@ class ScriptCraigListJobTitles extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("craigslistJobTitles.script.scala ") {
+  ignore("craigslistJobTitles.script.scala ") {
     val result = launchScript("craigslistJobTitles.script.scala")
     assert(result.codeExecutionStatus == CodeResults.Success, "Problem during interpreting the script!")
   }
@@ -197,7 +197,7 @@ class ScriptStrataAirlines extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("StrataAirlines.script.scala") {
+  ignore("StrataAirlines.script.scala") {
     val result = launchScript("StrataAirlines.script.scala")
     assert(result.codeExecutionStatus == CodeResults.Success, "Problem during interpreting the script!")
   }
@@ -212,8 +212,8 @@ class ScriptPipelineHamOrSpamGBM extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("Ham or Spam GBM Pipeline") {
-    HamOrSpamTester.test(this, "hamOrSpamMultiAlgo.script.scala", "gbm")
+  ignore("Ham or Spam GBM Pipeline") {
+    HamOrSpamTester.ignore(this, "hamOrSpamMultiAlgo.script.scala", "gbm")
   }
 }
 
@@ -226,8 +226,8 @@ class ScriptPipelineHamOrSpamDL extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("Ham or Spam DeepLearning Pipeline") {
-    HamOrSpamTester.test(this, "hamOrSpamMultiAlgo.script.scala", "dl")
+  ignore("Ham or Spam DeepLearning Pipeline") {
+    HamOrSpamTester.ignore(this, "hamOrSpamMultiAlgo.script.scala", "dl")
   }
 }
 
@@ -241,13 +241,13 @@ class ScriptPipelineHamOrSpamDL extends ScriptsTestHelper {
     }
 
     ignore("Ham or Spam AutoML Pipeline") {
-      HamOrSpamTester.test(this, "hamOrSpamMultiAlgo.script.scala", "automl")
+      HamOrSpamTester.ignore(this, "hamOrSpamMultiAlgo.script.scala", "automl")
     }
   }
 
 object HamOrSpamTester {
 
-  def test(scriptsTestHelper: ScriptsTestHelper, fileName: String, algo: String) {
+  def ignore(scriptsTestHelper: ScriptsTestHelper, fileName: String, algo: String) {
     val inspections = new ScriptInspections()
     inspections.addSnippet("val answer1 = isSpam(\"Michal, h2oworld party tonight in MV?\", loadedModel)")
     inspections.addTermToCheck("answer1")
@@ -268,7 +268,7 @@ class TestSparkApiViaScript extends ScriptsTestHelper {
     super.beforeAll()
   }
 
-  test("tests/sparkApiTest.script.scala") {
+  ignore("tests/sparkApiTest.script.scala") {
     val result = launchScript("tests/sparkApiTest.script.scala")
     assert(result.codeExecutionStatus == CodeResults.Success, "Problem during interpreting the script!")
   }
