@@ -204,7 +204,7 @@ def buildAndLint() {
                     ${getGradleCommand(config)} clean build -x check scalaStyle -PlocalNexusUsername=$LOCAL_NEXUS_USERNAME -PlocalNexusPassword=$LOCAL_NEXUS_PASSWORD
                     """
 
-                    stash 'sw-build'
+                    //stash 'sw-build'
                 }
             }
         }
@@ -405,7 +405,7 @@ def scriptsTest() {
 def integTest() {
     return { config ->
         stage('QA: Integration Tests - ' + config.backendMode) {
-            unstash 'sw-build'
+            //unstash 'sw-build'
             if (config.runIntegTests.toBoolean()) {
                 try {
                     sh """
