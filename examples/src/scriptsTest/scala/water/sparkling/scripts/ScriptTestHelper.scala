@@ -68,6 +68,7 @@ trait ScriptsTestHelper extends FunSuiteWithLogging with BeforeAndAfterAll{
       .set("spark.ext.h2o.backend.cluster.mode", sys.props.getOrElse("spark.ext.h2o.backend.cluster.mode", "internal"))
       .set("spark.ext.h2o.external.start.mode", sys.props.getOrElse("spark.ext.h2o.external.start.mode", "manual"))
       .set("spark.ext.h2o.hadoop.memory", "3G")
+      .set("spark.ext.h2o.client.verbose", "true")
       .setJars(Array(assemblyJar))
     conf
   }
