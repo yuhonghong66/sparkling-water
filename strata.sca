@@ -1,10 +1,11 @@
 import org.apache.spark.h2o._
-
 implicit val h2oContext = H2OContext.getOrCreate(sc)
 
 val location = "/Users/kuba/devel/repos/sparkling-water/examples/bigdata/"
 val fileNames = Seq[String]("2013-07.csv","2013-08.csv","2013-09.csv","2013-10.csv","2013-11.csv","2013-12.csv")
 val filesPaths = fileNames.map(name => location + name)
-val dataFiles = filesPaths.map(path => new java.io.File(path).toURI)
+val uris = filesPaths.map(path => new java.io.File(path).toURI)
 
-new H2OFrame(dataFiles:_*)
+
+import water.Key
+water.util.FrameUtils.parseFrame(Key.make("citibike.hex"), uris:_*)
